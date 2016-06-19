@@ -43,11 +43,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chckSubFolders = new System.Windows.Forms.CheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.howDoIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.replaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.appendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startRadioButton = new System.Windows.Forms.RadioButton();
+            this.endRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -135,6 +134,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.endRadioButton);
+            this.groupBox1.Controls.Add(this.startRadioButton);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtFind);
             this.groupBox1.Controls.Add(this.btnBrowse);
@@ -172,57 +173,58 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.replaceToolStripMenuItem,
+            this.appendToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(307, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // replaceToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.replaceToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.replaceToolStripMenuItem.Enabled = false;
+            this.replaceToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("replaceToolStripMenuItem.Image")));
+            this.replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
+            this.replaceToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
+            this.replaceToolStripMenuItem.Text = "Replace in Files";
+            this.replaceToolStripMenuItem.Click += new System.EventHandler(this.replaceToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
+            // appendToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.howDoIToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.appendToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("appendToolStripMenuItem.Image")));
+            this.appendToolStripMenuItem.Name = "appendToolStripMenuItem";
+            this.appendToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.appendToolStripMenuItem.Text = "Append to Files";
+            this.appendToolStripMenuItem.Click += new System.EventHandler(this.appendToolStripMenuItem_Click);
             // 
-            // howDoIToolStripMenuItem
+            // startRadioButton
             // 
-            this.howDoIToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("howDoIToolStripMenuItem.Image")));
-            this.howDoIToolStripMenuItem.Name = "howDoIToolStripMenuItem";
-            this.howDoIToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.howDoIToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.howDoIToolStripMenuItem.Text = "How Do I";
-            this.howDoIToolStripMenuItem.Click += new System.EventHandler(this.howDoIToolStripMenuItem_Click);
+            this.startRadioButton.AutoSize = true;
+            this.startRadioButton.Checked = true;
+            this.startRadioButton.Location = new System.Drawing.Point(8, 32);
+            this.startRadioButton.Name = "startRadioButton";
+            this.startRadioButton.Size = new System.Drawing.Size(47, 17);
+            this.startRadioButton.TabIndex = 4;
+            this.startRadioButton.TabStop = true;
+            this.startRadioButton.Text = "Start";
+            this.startRadioButton.UseVisualStyleBackColor = true;
+            this.startRadioButton.Visible = false;
             // 
-            // aboutToolStripMenuItem
+            // endRadioButton
             // 
-            this.aboutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripMenuItem.Image")));
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.endRadioButton.AutoSize = true;
+            this.endRadioButton.Location = new System.Drawing.Point(61, 32);
+            this.endRadioButton.Name = "endRadioButton";
+            this.endRadioButton.Size = new System.Drawing.Size(44, 17);
+            this.endRadioButton.TabIndex = 5;
+            this.endRadioButton.TabStop = true;
+            this.endRadioButton.Text = "End";
+            this.endRadioButton.UseVisualStyleBackColor = true;
+            this.endRadioButton.Visible = false;
             // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F4";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -233,7 +235,7 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "File Renamer Pro";
             this.groupBox1.ResumeLayout(false);
@@ -263,11 +265,10 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox chckSubFolders;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem howDoIToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem replaceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem appendToolStripMenuItem;
+        private System.Windows.Forms.RadioButton endRadioButton;
+        private System.Windows.Forms.RadioButton startRadioButton;
     }
 }
 

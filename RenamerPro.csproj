@@ -121,7 +121,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\append.png" />
     <Content Include="Assets\Deleket-Soft-Scraps-Edit-Document.ico" />
+    <Content Include="Assets\file.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

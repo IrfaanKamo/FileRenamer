@@ -13,6 +13,7 @@ namespace RenamerPro
     public partial class MainForm : Form
     {
         Renamer renamer;
+        bool isAppendMode = false;
 
         //--------------------------------------------------------------------------------
         public MainForm()
@@ -42,7 +43,7 @@ namespace RenamerPro
                 return;
 
             //If the textboxes are empty we cannot procede to replace names.
-            if (txtFind.Text == "")
+            if (!isAppendMode && txtFind.Text == "")
             {
                 MessageBox.Show("Please provide a search criteria", "Search Criteria Missing");
                 return;
@@ -67,34 +68,50 @@ namespace RenamerPro
             renamer.oldName = txtFind.Text;
             renamer.newName = txtReplace.Text;
 
+            renamer.isAppendMode = isAppendMode;
+            renamer.appendAtStart = startRadioButton.Checked;
+
             renamer.CollectAllFiles(chckSubFolders.Checked);
-            renamer.RenameAllFiles(chckMatchCase.Checked);
+            renamer.RenameAllFiles();
  
             MessageBox.Show(renamer.GetNumberOfFilesRenamed() + " of " + renamer.GetNumberOfFilesFound() +" files renamed", 
                             "Renaming Complete");
             renamer.ResetAppState();
         }
+
         //--------------------------------------------------------------------------------
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            isAppendMode = false;
+            appendToolStripMenuItem.BackColor = SystemColors.Control;
+            appendToolStripMenuItem.Enabled = true;
+            replaceToolStripMenuItem.BackColor = SystemColors.ActiveCaption;
+            replaceToolStripMenuItem.Enabled = false;
+            label1.Text = "Find what:";
+            txtFind.Show();
+            startRadioButton.Hide();
+            endRadioButton.Hide();
+            label2.Text = "Replace with:";
+            chckMatchCase.Enabled = true;
         }
 
         //--------------------------------------------------------------------------------
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void appendToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutBox about = new AboutBox();
-            about.ShowDialog();
-        }
-
-        //--------------------------------------------------------------------------------
-
-        private void howDoIToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Help help = new Help();
-            help.ShowDialog();
+            isAppendMode = true;
+            appendToolStripMenuItem.BackColor = SystemColors.ActiveCaption;
+            appendToolStripMenuItem.Enabled = false;
+            replaceToolStripMenuItem.BackColor = SystemColors.Control;
+            replaceToolStripMenuItem.Enabled = true;
+            label1.Text = "Append at:";
+            txtFind.Hide();
+            startRadioButton.Show();
+            endRadioButton.Show();
+            label2.Text = "Append with:";
+            chckMatchCase.Enabled = false;
+            chckMatchCase.Checked = false;
         }
         //--------------------------------------------------------------------------------
     }

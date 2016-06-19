@@ -7,11 +7,11 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("File Renamer Pro")]
-[assembly: AssemblyDescription("File Renamer Pro allows you to rename all files within a folder and its subfolders by searching for a specified piece of text and replacing it with a new piece of text. This application can be useful if many files require the same name changes. File Renamer Pro excludes file extensions when renaming the files.")]
+[assembly: AssemblyDescription("File Renamer Pro allows you to rename all files within a folder and its subfolders.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Created by Irfaan Kamo")]
-[assembly: AssemblyProduct("IrFaaN_KaMo Creations")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyProduct("IrFaaN_KaMo")]
+[assembly: AssemblyCopyright("2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("en")]
