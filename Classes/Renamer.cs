@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -78,87 +76,7 @@ namespace RenamerPro.Classes
         //--------------------------------------------------------------------------------
         // Private Functions
         //--------------------------------------------------------------------------------
-
-        private string UpdateFileName(string path)
-        {
-            string fileName = Path.GetFileName(path);
-            string extension = Path.GetExtension(path);
-            string fileNameWithoutExtension = fileName.Remove(fileName.Length - extension.Length);
-            string updatedName;
-
-            if(isAppendMode)
-            {
-                updatedName = AppendModeFileName(fileNameWithoutExtension, appendAtStart);      
-            }
-            else
-            {
-                updatedName = ReplaceModeFileName(fileNameWithoutExtension, matchCase);
-            }
-
-            return (updatedName + extension);
-        }
-
-        //--------------------------------------------------------------------------------
-
-        private bool RenameFile(string path)
-        {
-            //Find the position of the last occurence of '\' in order to know which directory it's in
-            int position = path.LastIndexOf('\\');
-
-            //Get the directory of the file
-            string pathWithoutFileName = path.Substring(0, position + 1);
-
-            //Delete the old file and create a new one with the new name.
-            try
-            {
-                File.Move(path, pathWithoutFileName + UpdateFileName(path));
-                //Count the number of files renamed by checking if the file names are diff.
-                if (path != (pathWithoutFileName + UpdateFileName(path)))
-                {
-                    numberofFilesRenamed++;                    
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Could not read file. Please ensure all files have an extension",
-                                "Error");
-                Logger.WriteWarning(ex.ToString());
-                return false;
-            }
-            return true;
-        }
-
-        //--------------------------------------------------------------------------------
-
-        private string AppendModeFileName(string oldFileName, bool atStart)
-        {
-            if (atStart)
-            {
-                return oldFileName.Insert(0, newName);
-            }
-            else
-            {
-                return oldFileName.Insert(oldFileName.Length, newName);
-            }
-        }
-
-        //--------------------------------------------------------------------------------
-
-        private string ReplaceModeFileName(string oldFileName, bool matchCase)
-        {
-            if (matchCase)
-            {
-                return oldFileName.Replace(oldName, newName);
-            }
-            else
-            {
-                var regex = new Regex(oldName, RegexOptions.IgnoreCase);
-                return regex.Replace(oldFileName, newName);
-            }
-        }
-
-        //--------------------------------------------------------------------------------
-
+        
         private void CollectAllFilesIncludingSubfolders()
         {
             Queue<string> queue = new Queue<string>();
@@ -208,7 +126,87 @@ namespace RenamerPro.Classes
                 numberOfFiles++;
             }
         }
-        
+
+        //--------------------------------------------------------------------------------
+
+        private bool RenameFile(string path)
+        {
+            //Find the position of the last occurence of '\' in order to know which directory it's in
+            int position = path.LastIndexOf('\\');
+
+            //Get the directory of the file
+            string pathWithoutFileName = path.Substring(0, position + 1);
+
+            //Delete the old file and create a new one with the new name.
+            try
+            {
+                File.Move(path, pathWithoutFileName + UpdateFileName(path));
+                //Count the number of files renamed by checking if the file names are diff.
+                if (path != (pathWithoutFileName + UpdateFileName(path)))
+                {
+                    numberofFilesRenamed++;                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not read file. Please ensure all files have an extension",
+                                "Error");
+                Logger.WriteWarning(ex.ToString());
+                return false;
+            }
+            return true;
+        }
+
+        //--------------------------------------------------------------------------------
+
+        private string UpdateFileName(string path)
+        {
+            string fileName = Path.GetFileName(path);
+            string extension = Path.GetExtension(path);
+            string fileNameWithoutExtension = fileName.Remove(fileName.Length - extension.Length);
+            string updatedName;
+
+            if (isAppendMode)
+            {
+                updatedName = AppendModeFileName(fileNameWithoutExtension, appendAtStart);
+            }
+            else
+            {
+                updatedName = ReplaceModeFileName(fileNameWithoutExtension, matchCase);
+            }
+
+            return (updatedName + extension);
+        }        
+
+        //--------------------------------------------------------------------------------
+
+        private string AppendModeFileName(string oldFileName, bool atStart)
+        {
+            if (atStart)
+            {
+                return oldFileName.Insert(0, newName);
+            }
+            else
+            {
+                return oldFileName.Insert(oldFileName.Length, newName);
+            }
+        }
+
+        //--------------------------------------------------------------------------------
+
+        private string ReplaceModeFileName(string oldFileName, bool matchCase)
+        {
+            if (matchCase)
+            {
+                return oldFileName.Replace(oldName, newName);
+            }
+            else
+            {
+                var regex = new Regex(oldName, RegexOptions.IgnoreCase);
+                return regex.Replace(oldFileName, newName);
+            }
+        }
+
         //--------------------------------------------------------------------------------
         // Getters
         //--------------------------------------------------------------------------------

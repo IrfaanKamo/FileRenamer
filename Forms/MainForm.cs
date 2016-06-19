@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using RenamerPro.Classes;
 
@@ -42,7 +38,7 @@ namespace RenamerPro
             if (renamer.GetListOfFiles().Count != 0)
                 return;
 
-            //If the textboxes are empty we cannot procede to replace names.
+            //If the textboxes are empty we cannot proceed to replace names.
             if (!isAppendMode && txtFind.Text == "")
             {
                 MessageBox.Show("Please provide a search criteria", "Search Criteria Missing");
@@ -55,22 +51,16 @@ namespace RenamerPro
             }
 
             //If the replacement text contains any illegal characters we cannot proceed.
-            char[] illegalChars = {'<', '>', ':', '/', '\\', '|', '?', '*', '"' };
-            foreach (char c in illegalChars)
+            if (AreIllegalCharactersUsed(txtReplace.Text))
             {
-                if (txtReplace.Text.Contains(c))
-                {
-                    MessageBox.Show("Illegal Characters used in replacement text", "Illegal Characters");
-                    return;
-                }
+                MessageBox.Show("A file name can't contain any of the following characters: \\ / : * ? < > |", "Illegal Characters");
+                return;
             }
                     
             renamer.oldName = txtFind.Text;
             renamer.newName = txtReplace.Text;
-
             renamer.isAppendMode = isAppendMode;
             renamer.appendAtStart = startRadioButton.Checked;
-
             renamer.CollectAllFiles(chckSubFolders.Checked);
             renamer.RenameAllFiles();
  
@@ -113,6 +103,21 @@ namespace RenamerPro
             chckMatchCase.Enabled = false;
             chckMatchCase.Checked = false;
         }
+        //--------------------------------------------------------------------------------
+
+        private bool AreIllegalCharactersUsed(string fileName)
+        {
+            char[] illegalChars = { '<', '>', ':', '/', '\\', '|', '?', '*', '"' };
+            foreach (char c in illegalChars)
+            {
+                if (fileName.Contains(c))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         //--------------------------------------------------------------------------------
     }
 }
